@@ -23,11 +23,14 @@ private:
 	ATank* GetControlledTank() const;	
 	void AimTowardsCrosshair();
 	bool GetSightRayHitLocation(FVector&) const;
-	bool GetLookDirection(FVector2D, FVector&) const;
+	bool GetLookDirection(const FVector2D&, FVector&) const;
+	bool GetLookVectorHitLocation(const FVector&, FVector&) const;
 
 	UPROPERTY(EditAnywhere)
 		float CrossHairXLocation = 0.5f;
 	UPROPERTY(EditAnywhere)
 		float CrossHairYLocation = 0.3333f;
+	UPROPERTY(EditAnywhere)
+		int32 LineTraceRange = 1000000; /// cm->meter->kilometer = 10km
 
 };

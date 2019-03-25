@@ -5,7 +5,7 @@
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
-	/*auto PlayersTank = GetPlayersTank();
+	/*ATank* PlayersTank = GetPlayersTank();
 	if (PlayersTank)
 		UE_LOG(LogTemp, Warning, TEXT("PlayersTank found: %s"), *PlayersTank->GetName())
 	else
