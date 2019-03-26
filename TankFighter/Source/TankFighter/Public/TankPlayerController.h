@@ -17,7 +17,7 @@ class TANKFIGHTER_API ATankPlayerController : public APlayerController
 
 public:
 	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
+	virtual void Tick(float) override;
 
 private:
 	ATank* GetControlledTank() const;	
