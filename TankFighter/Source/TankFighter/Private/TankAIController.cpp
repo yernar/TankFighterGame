@@ -17,7 +17,7 @@ void ATankAIController::Tick(float DeltaTime)
 	if (GetPlayersTank())
 	{
 		FVector* FirstPlayerTankLocation = new FVector( GetPlayersTank()->GetActorLocation() );
-		GetControlledTank()->AimAt(*FirstPlayerTankLocation);
+		//GetControlledTank()->AimAt(*FirstPlayerTankLocation);
 		delete FirstPlayerTankLocation;
 	}
 	

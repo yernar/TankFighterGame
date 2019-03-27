@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimComponent.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
 UTankAimComponent::UTankAimComponent()
@@ -31,11 +32,24 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	// ...
 }
 
-void UTankAimComponent::AimAt(FVector& HitLocation)
+void UTankAimComponent::AimAt(FVector& EndLocation, float ProjectileSpeed)
 {
-	FString TankName = GetOwner()->GetName();
-	FVector TankBarrelLocation = TankBarrel->GetComponentLocation();
-	UE_LOG(LogTemp, Warning, TEXT("%s is aiming at: %s; from: %s"), *TankName, *HitLocation.ToString(), *TankBarrelLocation.ToString())
+	if (!TankBarrel) return;
+	
+	FVector FireVelocity;
+	FVector StartLocation = TankBarrel->GetSocketLocation(FName("Projectile"));
+	FVector AimDirection;
+	///FString TankName = GetOwner()->GetName();
+	///FVector TankBarrelLocation = TankBarrel->GetComponentLocation();
+	UGameplayStatics::SuggestProjectileVelocity(this, 
+												FireVelocity, 
+												StartLocation, 
+												EndLocation, 
+												ProjectileSpeed) ? 
+			AimDirection = FireVelocity.GetSafeNormal() :
+			AimDirection = FVector(0);
+	UE_LOG(LogTemp, Warning, TEXT("AimingDirection: %s"), *AimDirection.ToString())
+	return;
 }
 
 void UTankAimComponent::SetTankBarrel(UStaticMeshComponent* TankBarrel)

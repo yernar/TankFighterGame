@@ -25,7 +25,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
 	// Player and AI's aimping point
-	void AimAt(FVector&);
+	void AimAt(FVector&, float);
 
 	void SetTankBarrel(UStaticMeshComponent*);
 
