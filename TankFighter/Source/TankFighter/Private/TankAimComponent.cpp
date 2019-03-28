@@ -2,6 +2,7 @@
 
 #include "TankAimComponent.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "TankBarrelStaticMeshComponent.h"
 
 // Sets default values for this component's properties
 UTankAimComponent::UTankAimComponent()
@@ -37,9 +38,9 @@ void UTankAimComponent::AimAt(FVector& EndLocation, float ProjectileSpeed)
 	if (!TankBarrel) return;
 	
 	FVector FireVelocity;
-	FVector StartLocation = TankBarrel->GetSocketLocation(FName("Projectile"));
+	FVector StartLocation = TankBarrel->GetSocketLocation(FName("ProjectileSocket"));
 	FVector AimDirection;
-	///FString TankName = GetOwner()->GetName();
+	FString TankName = GetOwner()->GetName();
 	///FVector TankBarrelLocation = TankBarrel->GetComponentLocation();
 	UGameplayStatics::SuggestProjectileVelocity(this, 
 												FireVelocity, 
@@ -48,12 +49,21 @@ void UTankAimComponent::AimAt(FVector& EndLocation, float ProjectileSpeed)
 												ProjectileSpeed) ? 
 			AimDirection = FireVelocity.GetSafeNormal() :
 			AimDirection = FVector(0);
-	UE_LOG(LogTemp, Warning, TEXT("AimingDirection: %s"), *AimDirection.ToString())
+	MoveBarrel(AimDirection);
+	///UE_LOG(LogTemp, Warning, TEXT("%s AimingDirection: %s"), *TankName, *AimDirection.ToCompactString())
 	return;
 }
 
-void UTankAimComponent::SetTankBarrel(UStaticMeshComponent* TankBarrel)
+void UTankAimComponent::SetTankBarrel(UTankBarrelStaticMeshComponent* TankBarrel)
 {
 	this->TankBarrel = TankBarrel;
+}
+
+void UTankAimComponent::MoveBarrel(FVector& AimDirection)
+{
+	FRotator BarrelRotation = TankBarrel->GetForwardVector().Rotation();
+	FRotator AimRotation = AimDirection.Rotation();
+	FRotator DeltaRotation = AimRotation - BarrelRotation;
+	//UE_LOG(LogTemp, Warning, TEXT("AimRotation: %s;\nBarrelRotation: %s;\nDeltaRotator: %s;"), *BarrelRotation.ToCompactString(), *AimRotation.ToCompactString(), *DeltaRotation.ToCompactString())
 }
 

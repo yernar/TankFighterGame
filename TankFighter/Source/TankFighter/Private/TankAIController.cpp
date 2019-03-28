@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAIController.h"
+#include "Tank.h"
 
 void ATankAIController::BeginPlay()
 {
@@ -17,7 +18,7 @@ void ATankAIController::Tick(float DeltaTime)
 	if (GetPlayersTank())
 	{
 		FVector* FirstPlayerTankLocation = new FVector( GetPlayersTank()->GetActorLocation() );
-		//GetControlledTank()->AimAt(*FirstPlayerTankLocation);
+		GetControlledTank()->AimAt(*FirstPlayerTankLocation);
 		delete FirstPlayerTankLocation;
 	}
 	

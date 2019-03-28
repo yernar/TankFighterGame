@@ -2,10 +2,11 @@
 
 #pragma once
 
-#include "TankAimComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
+
+class UTankAimComponent;
 
 UCLASS()
 class TANKFIGHTER_API ATank : public APawn
@@ -33,7 +34,7 @@ public:
 	void AimAt(FVector&);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTankBarrel(UStaticMeshComponent* TankBarrel);
+		void SetTankBarrel(UTankBarrelStaticMeshComponent* TankBarrel);
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float ProjectileSpeed = 100000.f; /// Launch speed of a missile. cm -> meter = 1000 m/s;
 };

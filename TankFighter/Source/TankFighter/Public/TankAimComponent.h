@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "TankAimComponent.generated.h"
 
+class UTankBarrelStaticMeshComponent;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TANKFIGHTER_API UTankAimComponent : public UActorComponent
@@ -27,7 +28,9 @@ public:
 	// Player and AI's aimping point
 	void AimAt(FVector&, float);
 
-	void SetTankBarrel(UStaticMeshComponent*);
+	void SetTankBarrel(UTankBarrelStaticMeshComponent*);
+
+	void MoveBarrel(FVector&);
 
 private:
 	UStaticMeshComponent* TankBarrel = nullptr;		
