@@ -64,6 +64,7 @@ void UTankAimComponent::MoveBarrel(FVector& AimDirection)
 	FRotator BarrelRotation = TankBarrel->GetForwardVector().Rotation();
 	FRotator AimRotation = AimDirection.Rotation();
 	FRotator DeltaRotation = AimRotation - BarrelRotation;
+	TankBarrel->Elevate(70.f);
 	//UE_LOG(LogTemp, Warning, TEXT("AimRotation: %s;\nBarrelRotation: %s;\nDeltaRotator: %s;"), *BarrelRotation.ToCompactString(), *AimRotation.ToCompactString(), *DeltaRotation.ToCompactString())
 }
 

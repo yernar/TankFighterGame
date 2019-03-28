@@ -33,5 +33,5 @@ public:
 	void MoveBarrel(FVector&);
 
 private:
-	UStaticMeshComponent* TankBarrel = nullptr;		
+	UTankBarrelStaticMeshComponent* TankBarrel = nullptr;
 };
