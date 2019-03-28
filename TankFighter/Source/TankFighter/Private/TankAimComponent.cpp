@@ -36,21 +36,27 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 void UTankAimComponent::AimAt(FVector& EndLocation, float ProjectileSpeed)
 {
 	if (!TankBarrel) return;
+	//UE_LOG(LogTemp, Warning, TEXT("TEST UTANKAIMCOMPONENT AIMAT"))
 	
 	FVector FireVelocity;
 	FVector StartLocation = TankBarrel->GetSocketLocation(FName("ProjectileSocket"));
 	FVector AimDirection;
 	FString TankName = GetOwner()->GetName();
 	///FVector TankBarrelLocation = TankBarrel->GetComponentLocation();
+	FString bTest;
 	UGameplayStatics::SuggestProjectileVelocity(this, 
 												FireVelocity, 
 												StartLocation, 
 												EndLocation, 
-												ProjectileSpeed) ? 
-			AimDirection = FireVelocity.GetSafeNormal() :
-			AimDirection = FVector(0);
+												ProjectileSpeed, 
+												false, 
+												0.f, 
+												0.f, 
+												ESuggestProjVelocityTraceOption::DoNotTrace) ? 
+						AimDirection = FireVelocity.GetSafeNormal() :
+						AimDirection = FVector(0);
 	MoveBarrel(AimDirection);
-	///UE_LOG(LogTemp, Warning, TEXT("%s AimingDirection: %s"), *TankName, *AimDirection.ToCompactString())
+	UE_LOG(LogTemp, Warning, TEXT("%s AimingDirection: %s"), *TankName, *AimDirection.ToCompactString())
 	return;
 }
 
@@ -64,7 +70,8 @@ void UTankAimComponent::MoveBarrel(FVector& AimDirection)
 	FRotator BarrelRotation = TankBarrel->GetForwardVector().Rotation();
 	FRotator AimRotation = AimDirection.Rotation();
 	FRotator DeltaRotation = AimRotation - BarrelRotation;
-	TankBarrel->Elevate(70.f);
+	return;
+	//TankBarrel->Elevate(75.f);
 	//UE_LOG(LogTemp, Warning, TEXT("AimRotation: %s;\nBarrelRotation: %s;\nDeltaRotator: %s;"), *BarrelRotation.ToCompactString(), *AimRotation.ToCompactString(), *DeltaRotation.ToCompactString())
 }
 
