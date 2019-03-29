@@ -38,5 +38,12 @@ void ATank::AimAt(FVector& HitLocation)
 
 void ATank::SetTankBarrel(UTankBarrelStaticMeshComponent* TankBarrel)
 {
+	if (!TankBarrel) return;
 	TankAimComponent->SetTankBarrel(TankBarrel);
+}
+
+void ATank::SetTankTurret(UTankTurretStaticMeshComponent* TankTurret)
+{
+	if (!TankTurret) return;
+	TankAimComponent->SetTankTurret(TankTurret);
 }

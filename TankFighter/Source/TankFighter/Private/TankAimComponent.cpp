@@ -3,6 +3,7 @@
 #include "TankAimComponent.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "TankBarrelStaticMeshComponent.h"
+#include "TankTurretStaticMeshComponent.h"
 
 // Sets default values for this component's properties
 UTankAimComponent::UTankAimComponent()
@@ -56,7 +57,8 @@ void UTankAimComponent::AimAt(FVector& EndLocation, float ProjectileSpeed)
 						AimDirection = FireVelocity.GetSafeNormal() :
 						AimDirection = FVector(0);
 	MoveBarrel(AimDirection);
-	UE_LOG(LogTemp, Warning, TEXT("%s AimingDirection: %s"), *TankName, *AimDirection.ToCompactString())
+	RotateTurret(AimDirection);
+	///UE_LOG(LogTemp, Warning, TEXT("%s AimingDirection: %s"), *TankName, *AimDirection.ToCompactString())
 	return;
 }
 
@@ -65,13 +67,35 @@ void UTankAimComponent::SetTankBarrel(UTankBarrelStaticMeshComponent* TankBarrel
 	this->TankBarrel = TankBarrel;
 }
 
+void UTankAimComponent::SetTankTurret(UTankTurretStaticMeshComponent* TankTurret)
+{
+	this->TankTurret = TankTurret;
+}
+
 void UTankAimComponent::MoveBarrel(FVector& AimDirection)
 {
 	FRotator BarrelRotation = TankBarrel->GetForwardVector().Rotation();
 	FRotator AimRotation = AimDirection.Rotation();
 	FRotator DeltaRotation = AimRotation - BarrelRotation;
-	TankBarrel->Elevate(AimRotation.Pitch);
+	TankBarrel->Elevate(DeltaRotation.Pitch);
 	return;
 	//UE_LOG(LogTemp, Warning, TEXT("AimRotation: %s;\nBarrelRotation: %s;\nDeltaRotator: %s;"), *BarrelRotation.ToCompactString(), *AimRotation.ToCompactString(), *DeltaRotation.ToCompactString())
+}
+
+void UTankAimComponent::RotateTurret(FVector& AimDirection)
+{
+	FRotator TurretRotation = TankBarrel->GetForwardVector().Rotation();
+	FRotator AimRotation = AimDirection.Rotation();
+	FRotator DeltaRotation = AimRotation - TurretRotation;
+	//UE_LOG(LogTemp, Error, TEXT("%f"), AimRotation.Yaw)
+	if (FMath::Abs(DeltaRotation.Yaw) < 180)
+	{
+		TankTurret->Rotate(DeltaRotation.Yaw);
+	}
+	else
+	{
+		TankTurret->Rotate(-DeltaRotation.Yaw);
+	}
+	return;
 }
 

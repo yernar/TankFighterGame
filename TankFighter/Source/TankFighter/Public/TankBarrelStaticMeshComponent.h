@@ -20,7 +20,7 @@ public:
 private:
 	//DPS = degrees per second
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxTankBarrelDPS = 5.f;
+		float MaxTankBarrelDPS = 10.f;
 	//D = degrees
 	UPROPERTY(EditAnywhere, Category = Setup)
 		float MaxTankBarrelElevationsD = 25.5f; 

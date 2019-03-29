@@ -35,6 +35,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTankBarrel(UTankBarrelStaticMeshComponent* TankBarrel);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void SetTankTurret(UTankTurretStaticMeshComponent* TankTurret);
 	UPROPERTY(EditAnywhere, Category = Firing)
-		float ProjectileSpeed = 50000.f; /// Launch speed of a missile. cm -> meter = 500 m/s;
+		float ProjectileSpeed = 5000.f; /// Launch speed of a missile. cm -> meter = 500 m/s;
 };
