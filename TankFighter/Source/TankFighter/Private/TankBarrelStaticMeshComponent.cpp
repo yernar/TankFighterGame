@@ -2,8 +2,11 @@
 
 #include "TankBarrelStaticMeshComponent.h"
 
-void UTankBarrelStaticMeshComponent::Elevate(float DPS) /// DPS = DegreesPerSecond
+void UTankBarrelStaticMeshComponent::Elevate(float ElevationSpeed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("SPEED: %f"), DPS)
+	ElevationSpeed = (ElevationSpeed >= 1.f ? 1.f : (ElevationSpeed <= -1.f ? -1.f : 0.f));
+	float ElevationChange = ElevationSpeed * MaxTankBarrelDPS * GetWorld()->DeltaTimeSeconds;
+	float RawNewElevation = RelativeRotation.Pitch + ElevationChange;
+	SetRelativeRotation(FRotator(FMath::Clamp<float>(RawNewElevation, MinTankBarrelElevationsD, MaxTankBarrelElevationsD), 0, 0));
 }
 
