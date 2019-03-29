@@ -47,3 +47,8 @@ void ATank::SetTankTurret(UTankTurretStaticMeshComponent* TankTurret)
 	if (!TankTurret) return;
 	TankAimComponent->SetTankTurret(TankTurret);
 }
+
+void ATank::Fire()
+{
+	UE_LOG(LogTemp, Error, TEXT("OMAIGO'OD ITS FIRING, FIRE, FIRE"))
+}
