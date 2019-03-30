@@ -19,7 +19,7 @@ public:
 
 private:
 	//DPS = degrees per second
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float MaxTankTurretDPS = 25.f;
 	
 };

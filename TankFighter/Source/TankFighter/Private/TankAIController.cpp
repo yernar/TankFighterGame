@@ -19,7 +19,6 @@ void ATankAIController::Tick(float DeltaTime)
 	ATank* ControlledTank = Cast<ATank>(GetPawn());
 	if (FirstPlayersTank)
 	{
-		UE_LOG(LogTemp, Error, TEXT("OMAIGO'OD ITS FIRING, FIRE, FIRE"));
 		FVector* FirstPlayersTankLocation = new FVector(FirstPlayersTank->GetActorLocation());
 		ControlledTank->AimAt(*FirstPlayersTankLocation);
 		ControlledTank->Fire();

@@ -50,6 +50,12 @@ void ATank::SetTankTurret(UTankTurretStaticMeshComponent* TankTurret)
 	TankAimComponent->SetTankTurret(TankTurret);
 }
 
+void ATank::SetTankTrack(UTankTrackStaticMeshComponent* TankTrack)
+{
+	if (!TankTrack) return;
+	this->TankTrack = TankTrack;
+}
+
 void ATank::Fire()
 {
 	bool bIsReloaded = ((FPlatformTime::Seconds() - LastFireTime) > FireCooldown);

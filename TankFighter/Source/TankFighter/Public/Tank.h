@@ -9,6 +9,7 @@
 class UTankAimComponent;
 class AProjectile;
 class UTankBarrelStaticMeshComponent;
+class UTankTrackStaticMeshComponent;
 
 UCLASS()
 class TANKFIGHTER_API ATank : public APawn
@@ -43,10 +44,16 @@ private:
 		void SetTankBarrel(UTankBarrelStaticMeshComponent* TankBarrel);
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTankTurret(UTankTurretStaticMeshComponent* TankTurret);
-	UPROPERTY(EditAnywhere, Category = Firing)
-		float ProjectileSpeed = 5000.f; /// Launch speed of a missile. cm -> meter = 500 m/s;
-	UPROPERTY(EditAnywhere, Category = Setup)
-		TSubclassOf<AProjectile> ProjectileType;
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void SetTankTrack(UTankTrackStaticMeshComponent* TankTrack);
+	UPROPERTY(EditDefaultsOnly, Category = FiringSetup)
+		float ProjectileSpeed = 5000.f; /// Launch speed of a projectile. cm -> meter = 500 m/s;
+	UPROPERTY(EditDefaultsOnly, Category = FiringSetup)
+		float FireCooldown = 3.f;
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		TSubclassOf<AProjectile> ProjectileType = nullptr;
 	double LastFireTime = 0;
-	float FireCooldown = 3.f;
+
+	UTankTrackStaticMeshComponent* TankTrack = nullptr;
+	
 };

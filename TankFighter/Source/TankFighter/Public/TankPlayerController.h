@@ -27,11 +27,11 @@ private:
 	bool GetLookDirection(const FVector2D&, FVector&) const;
 	bool GetLookVectorHitLocation(const FVector&, FVector&) const;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 		float CrossHairXLocation = 0.5f;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 		float CrossHairYLocation = 0.3333f;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 		float LineTraceRange = 1000000.f; /// cm->meter->kilometer = 10km
 
 };
