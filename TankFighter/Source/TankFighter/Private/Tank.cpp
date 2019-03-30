@@ -52,12 +52,14 @@ void ATank::SetTankTurret(UTankTurretStaticMeshComponent* TankTurret)
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Error, TEXT("OMAIGO'OD ITS FIRING, FIRE, FIRE"));
+	bool bIsReloaded = ((FPlatformTime::Seconds() - LastFireTime) > FireCooldown);
 	UTankBarrelStaticMeshComponent *TankBarrel = TankAimComponent->GetTankBarrel();
-	if (!TankBarrel) return;
-	AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileType,
-								(TankBarrel->GetSocketLocation(FName("ProjectileSocket"))),
-								(TankBarrel->GetSocketRotation(FName("ProjectileSocket"))));
-	Projectile->LaunchProjectile(ProjectileSpeed);
-	
+	if (TankBarrel && bIsReloaded)
+	{
+		AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileType,
+			(TankBarrel->GetSocketLocation(FName("ProjectileSocket"))),
+			(TankBarrel->GetSocketRotation(FName("ProjectileSocket"))));
+		Projectile->LaunchProjectile(ProjectileSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}	
 }

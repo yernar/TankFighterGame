@@ -19,8 +19,4 @@ class TANKFIGHTER_API ATankAIController : public AAIController
 public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float) override;
-
-private:
-	ATank* GetControlledTank() const;
-	ATank* GetPlayersTank() const;	
 };

@@ -15,21 +15,14 @@ void ATankAIController::BeginPlay()
 
 void ATankAIController::Tick(float DeltaTime)
 {
-	if (GetPlayersTank())
+	ATank* FirstPlayersTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	ATank* ControlledTank = Cast<ATank>(GetPawn());
+	if (FirstPlayersTank)
 	{
-		FVector* FirstPlayerTankLocation = new FVector( GetPlayersTank()->GetActorLocation() );
-		GetControlledTank()->AimAt(*FirstPlayerTankLocation);
-		delete FirstPlayerTankLocation;
-	}
-	
-}
-
-ATank* ATankAIController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
-ATank* ATankAIController::GetPlayersTank() const
-{
-	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+		UE_LOG(LogTemp, Error, TEXT("OMAIGO'OD ITS FIRING, FIRE, FIRE"));
+		FVector* FirstPlayersTankLocation = new FVector(FirstPlayersTank->GetActorLocation());
+		ControlledTank->AimAt(*FirstPlayersTankLocation);
+		ControlledTank->Fire();
+		delete FirstPlayersTankLocation;
+	}	
 }

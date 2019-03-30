@@ -35,15 +35,18 @@ public:
 	// Player and AI's aimping point
 	void AimAt(FVector&);
 
+	UFUNCTION(BlueprintCallable)
+		void Fire();
+
 private:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTankBarrel(UTankBarrelStaticMeshComponent* TankBarrel);
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTankTurret(UTankTurretStaticMeshComponent* TankTurret);
-	UFUNCTION(BlueprintCallable)
-		void Fire();
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float ProjectileSpeed = 5000.f; /// Launch speed of a missile. cm -> meter = 500 m/s;
 	UPROPERTY(EditAnywhere, Category = Setup)
 		TSubclassOf<AProjectile> ProjectileType;
+	double LastFireTime = 0;
+	float FireCooldown = 3.f;
 };
