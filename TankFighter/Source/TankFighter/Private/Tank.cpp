@@ -55,7 +55,9 @@ void ATank::Fire()
 	UE_LOG(LogTemp, Error, TEXT("OMAIGO'OD ITS FIRING, FIRE, FIRE"));
 	UTankBarrelStaticMeshComponent *TankBarrel = TankAimComponent->GetTankBarrel();
 	if (!TankBarrel) return;
-	GetWorld()->SpawnActor<AProjectile>(Projectiles,
-		(TankBarrel->GetSocketLocation(FName("ProjectileSocket"))),
-		(TankBarrel->GetSocketRotation(FName("ProjectileSocket"))));
+	AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileType,
+								(TankBarrel->GetSocketLocation(FName("ProjectileSocket"))),
+								(TankBarrel->GetSocketRotation(FName("ProjectileSocket"))));
+	Projectile->LaunchProjectile(ProjectileSpeed);
+	
 }
