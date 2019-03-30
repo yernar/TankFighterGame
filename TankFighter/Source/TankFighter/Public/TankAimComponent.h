@@ -33,6 +33,8 @@ public:
 	void MoveBarrel(FVector&);
 	void RotateTurret(FVector&);
 
+	UTankBarrelStaticMeshComponent* GetTankBarrel() const;
+
 private:
 	UTankBarrelStaticMeshComponent* TankBarrel = nullptr;
 	UTankTurretStaticMeshComponent* TankTurret = nullptr;

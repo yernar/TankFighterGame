@@ -7,6 +7,8 @@
 #include "Tank.generated.h"
 
 class UTankAimComponent;
+class AProjectile;
+class UTankBarrelStaticMeshComponent;
 
 UCLASS()
 class TANKFIGHTER_API ATank : public APawn
@@ -33,6 +35,7 @@ public:
 	// Player and AI's aimping point
 	void AimAt(FVector&);
 
+private:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTankBarrel(UTankBarrelStaticMeshComponent* TankBarrel);
 	UFUNCTION(BlueprintCallable, Category = Setup)
@@ -41,4 +44,6 @@ public:
 		void Fire();
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float ProjectileSpeed = 5000.f; /// Launch speed of a missile. cm -> meter = 500 m/s;
+	UPROPERTY(EditAnywhere, Category = Setup)
+		TSubclassOf<AProjectile> Projectiles;
 };

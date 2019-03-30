@@ -2,6 +2,8 @@
 
 #include "Tank.h"
 #include "TankAimComponent.h"
+#include "Projectile.h"
+#include "TankBarrelStaticMeshComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -50,5 +52,10 @@ void ATank::SetTankTurret(UTankTurretStaticMeshComponent* TankTurret)
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Error, TEXT("OMAIGO'OD ITS FIRING, FIRE, FIRE"))
+	UE_LOG(LogTemp, Error, TEXT("OMAIGO'OD ITS FIRING, FIRE, FIRE"));
+	UTankBarrelStaticMeshComponent *TankBarrel = TankAimComponent->GetTankBarrel();
+	if (!TankBarrel) return;
+	GetWorld()->SpawnActor<AProjectile>(Projectiles,
+		(TankBarrel->GetSocketLocation(FName("ProjectileSocket"))),
+		(TankBarrel->GetSocketRotation(FName("ProjectileSocket"))));
 }

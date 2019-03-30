@@ -46,16 +46,14 @@ void UTankAimComponent::AimAt(FVector& EndLocation, float ProjectileSpeed)
 	///FVector TankBarrelLocation = TankBarrel->GetComponentLocation();
 	FString bTest;
 	UGameplayStatics::SuggestProjectileVelocity(this, 
-												FireVelocity, 
-												StartLocation, 
-												EndLocation, 
-												ProjectileSpeed, 
-												false, 
-												0.f, 
-												0.f, 
-												ESuggestProjVelocityTraceOption::DoNotTrace) ? 
-						AimDirection = FireVelocity.GetSafeNormal() :
-						AimDirection = FVector(0);
+						FireVelocity, 
+						StartLocation, 
+						EndLocation, 
+						ProjectileSpeed, 
+						false, 0.f, 0.f, 
+						ESuggestProjVelocityTraceOption::DoNotTrace) ? 
+				AimDirection = FireVelocity.GetSafeNormal() :
+				AimDirection = FVector(0);
 	MoveBarrel(AimDirection);
 	RotateTurret(AimDirection);
 	///UE_LOG(LogTemp, Warning, TEXT("%s AimingDirection: %s"), *TankName, *AimDirection.ToCompactString())
@@ -88,14 +86,14 @@ void UTankAimComponent::RotateTurret(FVector& AimDirection)
 	FRotator AimRotation = AimDirection.Rotation();
 	FRotator DeltaRotation = AimRotation - TurretRotation;
 	//UE_LOG(LogTemp, Error, TEXT("%f"), AimRotation.Yaw)
-	if (FMath::Abs(DeltaRotation.Yaw) < 180)
-	{
-		TankTurret->Rotate(DeltaRotation.Yaw);
-	}
-	else
-	{
-		TankTurret->Rotate(-DeltaRotation.Yaw);
-	}
+	( (FMath::Abs(DeltaRotation.Yaw) < 180) ? 
+		(TankTurret->Rotate(DeltaRotation.Yaw)) : 
+		(TankTurret->Rotate(-DeltaRotation.Yaw)) );
 	return;
+}
+
+UTankBarrelStaticMeshComponent* UTankAimComponent::GetTankBarrel() const
+{
+	return TankBarrel;
 }
 
