@@ -4,6 +4,7 @@
 #include "TankAimComponent.h"
 #include "Projectile.h"
 #include "TankBarrelStaticMeshComponent.h"
+#include "TankNavMovementComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -12,6 +13,7 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 
 	TankAimComponent = CreateDefaultSubobject<UTankAimComponent>(FName("Aim Components"));
+	TankMovementComponent = CreateDefaultSubobject<UTankNavMovementComponent>(FName("Movement Components"));
 }
 
 // Called when the game starts or when spawned
@@ -48,12 +50,6 @@ void ATank::SetTankTurret(UTankTurretStaticMeshComponent* TankTurret)
 {
 	if (!TankTurret) return;
 	TankAimComponent->SetTankTurret(TankTurret);
-}
-
-void ATank::SetTankTrack(UTankTrackStaticMeshComponent* TankTrack)
-{
-	if (!TankTrack) return;
-	this->TankTrack = TankTrack;
 }
 
 void ATank::Fire()
