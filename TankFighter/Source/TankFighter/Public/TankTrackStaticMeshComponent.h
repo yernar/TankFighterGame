@@ -14,9 +14,10 @@ class TANKFIGHTER_API UTankTrackStaticMeshComponent : public UStaticMeshComponen
 {
 	GENERATED_BODY()
 
-private:
+public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 		void SetThrottle(float Throttle);
+private:
 	// F = Force, value in Newtons
 	UPROPERTY(EditDefaultsOnly, Category = Force)
 		float MaxTrackDrivingF = 50000000.f; // F = mass * acceleration. Tank mass = 50000kg * 10m/s^2
