@@ -19,6 +19,7 @@ void ATankAIController::Tick(float DeltaTime)
 	ATank* ControlledTank = Cast<ATank>(GetPawn());
 	if (FirstPlayersTank)
 	{
+		MoveToActor(FirstPlayersTank, AcceptanceRadius);
 		FVector* FirstPlayersTankLocation = new FVector(FirstPlayersTank->GetActorLocation());
 		ControlledTank->AimAt(*FirstPlayersTankLocation);
 		ControlledTank->Fire();
