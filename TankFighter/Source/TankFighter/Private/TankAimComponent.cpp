@@ -20,7 +20,7 @@ UTankAimComponent::UTankAimComponent()
 void UTankAimComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
+	/// UE_LOG(LogTemp, Warning, TEXT("%d"), PointerStatus)
 	// ...
 	
 }

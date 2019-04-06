@@ -31,7 +31,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly, Category = Setup)
-		EPointerStatus PointerStatus = EPointerStatus::Reloading;
+		EPointerStatus PointerStatus = EPointerStatus::Aiming;
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTankTurretBarrel(UTankTurretStaticMeshComponent* TankTurret, UTankBarrelStaticMeshComponent* TankBarrel);
 
