@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Magic Inc., Yernar Aldabergenov© 2019.
 
 #include "Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
@@ -32,4 +32,3 @@ void AProjectile::LaunchProjectile(float ProjectileSpeed)
 	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * ProjectileSpeed);
 	ProjectileMovement->Activate();
 }
-
