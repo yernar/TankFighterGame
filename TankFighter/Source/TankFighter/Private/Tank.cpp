@@ -63,5 +63,9 @@ void ATank::Fire()
 			(TankBarrel->GetSocketRotation(FName("ProjectileSocket"))));
 		Projectile->LaunchProjectile(ProjectileSpeed);
 		LastFireTime = FPlatformTime::Seconds();
-	}	
+	}
+	else if (TankBarrel)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("RELOADING"))
+	}
 }

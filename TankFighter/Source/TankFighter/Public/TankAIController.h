@@ -21,5 +21,6 @@ public:
 	virtual void Tick(float) override;
 
 private:
+	UPROPERTY(EditDefaultsOnly, Category = Movement)
 	float AcceptanceRadius = 3000.f;
 };
