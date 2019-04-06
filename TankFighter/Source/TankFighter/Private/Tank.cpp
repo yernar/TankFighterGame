@@ -64,8 +64,4 @@ void ATank::Fire()
 		Projectile->LaunchProjectile(ProjectileSpeed);
 		LastFireTime = FPlatformTime::Seconds();
 	}
-	else if (TankBarrel)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("RELOADING"))
-	}
 }
