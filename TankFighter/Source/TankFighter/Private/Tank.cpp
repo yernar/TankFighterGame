@@ -29,14 +29,14 @@ void ATank::Tick(float DeltaTime)
 }
 
 // Called to bind functionality to input
-/*void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+/* void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }*/
 
 void ATank::AimAt(FVector& HitLocation)
-{
-	/// UE_LOG(LogTemp, Warning, TEXT("TEST ATANK AIMAT"))
+{	
+	if (!TankAimComponent) return;
 	TankAimComponent->AimAt(HitLocation, ProjectileSpeed);
 }
 
@@ -44,6 +44,7 @@ void ATank::AimAt(FVector& HitLocation)
 
 void ATank::Fire()
 {
+	if (!TankAimComponent) return;
 	bool bIsReloaded = ((FPlatformTime::Seconds() - LastFireTime) > FireCooldown);
 	UTankBarrelStaticMeshComponent *TankBarrel = TankAimComponent->GetTankBarrel();
 	if (TankBarrel && bIsReloaded)

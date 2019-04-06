@@ -35,7 +35,7 @@ public:
 	virtual void Tick(float) override;
 
 	// Called to bind functionality to input
-	///virtual void SetupPlayerInputComponent(class UInputComponent*) override;
+	/// virtual void SetupPlayerInputComponent(class UInputComponent*) override;
 
 	// Player and AI's aimping point
 	void AimAt(FVector&);
