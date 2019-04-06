@@ -30,7 +30,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 		UTankNavMovementComponent* TankMovementComponent = nullptr;
 
-
 public:	
 	// Called every frame
 	virtual void Tick(float) override;
@@ -55,5 +54,5 @@ private:
 		float FireCooldown = 3.f;
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		TSubclassOf<AProjectile> ProjectileType = nullptr;
-	double LastFireTime = 0;	
+	double LastFireTime = 0;
 };

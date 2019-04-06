@@ -9,6 +9,14 @@
 class UTankBarrelStaticMeshComponent;
 class UTankTurretStaticMeshComponent;
 
+UENUM()
+enum class EPointerStatus : uint8
+{
+	Reloading,
+	Locked,
+	Aiming
+};
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TANKFIGHTER_API UTankAimComponent : public UActorComponent
 {
@@ -21,6 +29,9 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	UPROPERTY(BlueprintReadOnly, Category = Setup)
+		EPointerStatus PointerStatus = EPointerStatus::Reloading;
 
 public:	
 	// Called every frame
