@@ -35,7 +35,7 @@ public:
 	virtual void Tick(float) override;
 
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent*) override;
+	///virtual void SetupPlayerInputComponent(class UInputComponent*) override;
 
 	// Player and AI's aimping point
 	void AimAt(FVector&);
@@ -44,10 +44,6 @@ public:
 		void Fire();
 
 private:
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTankBarrel(UTankBarrelStaticMeshComponent* TankBarrel);
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTankTurret(UTankTurretStaticMeshComponent* TankTurret);
 	UPROPERTY(EditDefaultsOnly, Category = FiringSetup)
 		float ProjectileSpeed = 5000.f; /// Launch speed of a projectile. cm -> meter = 500 m/s;
 	UPROPERTY(EditDefaultsOnly, Category = FiringSetup)

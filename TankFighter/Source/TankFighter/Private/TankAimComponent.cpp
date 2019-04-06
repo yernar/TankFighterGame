@@ -60,14 +60,10 @@ void UTankAimComponent::AimAt(FVector& EndLocation, float ProjectileSpeed)
 	return;
 }
 
-void UTankAimComponent::SetTankBarrel(UTankBarrelStaticMeshComponent* TankBarrel)
-{
-	this->TankBarrel = TankBarrel;
-}
-
-void UTankAimComponent::SetTankTurret(UTankTurretStaticMeshComponent* TankTurret)
+void UTankAimComponent::SetTankTurretBarrel(UTankTurretStaticMeshComponent* TankTurret, UTankBarrelStaticMeshComponent* TankBarrel)
 {
 	this->TankTurret = TankTurret;
+	this->TankBarrel = TankBarrel;
 }
 
 void UTankAimComponent::MoveBarrel(FVector& AimDirection)

@@ -32,6 +32,8 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = Setup)
 		EPointerStatus PointerStatus = EPointerStatus::Reloading;
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTankTurretBarrel(UTankTurretStaticMeshComponent* TankTurret, UTankBarrelStaticMeshComponent* TankBarrel);
 
 public:	
 	// Called every frame
@@ -39,8 +41,6 @@ public:
 	
 	// Player and AI's aimping point
 	void AimAt(FVector&, float);
-	void SetTankBarrel(UTankBarrelStaticMeshComponent*);
-	void SetTankTurret(UTankTurretStaticMeshComponent*);
 	void MoveBarrel(FVector&);
 	void RotateTurret(FVector&);
 

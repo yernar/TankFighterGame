@@ -12,8 +12,8 @@ ATank::ATank()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	TankAimComponent = CreateDefaultSubobject<UTankAimComponent>(FName("Aim Components"));
-	// TankMovementComponent = CreateDefaultSubobject<UTankNavMovementComponent>(FName("Movement Components"));
+	/// TankAimComponent = CreateDefaultSubobject<UTankAimComponent>(FName("Aim Components"));
+	/// TankMovementComponent = CreateDefaultSubobject<UTankNavMovementComponent>(FName("Movement Components"));
 }
 
 // Called when the game starts or when spawned
@@ -29,28 +29,18 @@ void ATank::Tick(float DeltaTime)
 }
 
 // Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+/*void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-}
+}*/
 
 void ATank::AimAt(FVector& HitLocation)
 {
-	///UE_LOG(LogTemp, Warning, TEXT("TEST ATANK AIMAT"))
+	/// UE_LOG(LogTemp, Warning, TEXT("TEST ATANK AIMAT"))
 	TankAimComponent->AimAt(HitLocation, ProjectileSpeed);
 }
 
-void ATank::SetTankBarrel(UTankBarrelStaticMeshComponent* TankBarrel)
-{
-	if (!TankBarrel) return;
-	TankAimComponent->SetTankBarrel(TankBarrel);
-}
 
-void ATank::SetTankTurret(UTankTurretStaticMeshComponent* TankTurret)
-{
-	if (!TankTurret) return;
-	TankAimComponent->SetTankTurret(TankTurret);
-}
 
 void ATank::Fire()
 {
