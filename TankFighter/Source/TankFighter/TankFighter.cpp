@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Magic Inc., Yernar Aldabergenov© 2019.
 
 #include "TankFighter.h"
 #include "Modules/ModuleManager.h"
