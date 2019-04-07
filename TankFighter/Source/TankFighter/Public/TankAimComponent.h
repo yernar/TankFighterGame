@@ -33,7 +33,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = Setup)
 		EPointerStatus PointerStatus = EPointerStatus::Aiming;
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTankTurretBarrel(UTankTurretStaticMeshComponent* TankTurret, UTankBarrelStaticMeshComponent* TankBarrel);
+		void SetTankTurretBarrel(UTankTurretStaticMeshComponent* TankTurret, UTankBarrelStaticMeshComponent* TankBarrel);
 
 public:	
 	// Called every frame
