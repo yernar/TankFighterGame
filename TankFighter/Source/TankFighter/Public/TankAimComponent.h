@@ -14,7 +14,6 @@ UENUM()
 enum class EPointerStatus : uint8
 {
 	Reloading,
-	Locked,
 	Aiming
 };
 
@@ -32,34 +31,33 @@ public:
 
 	// Player and AI's aimping point
 	void AimAt(FVector&);
-	void MoveBarrel(FVector&);
-	void RotateTurret(FVector&);
-	UTankBarrelStaticMeshComponent* GetTankBarrel() const;
-	UTankTurretStaticMeshComponent* GetTankTurret() const;
 
 	UFUNCTION(BlueprintCallable)
 		void Fire();
+
+private:
+	void MoveBarrel(FVector&);
+	void RotateTurret(FVector&);
+	bool IsReloaded() const;
+
+	UTankBarrelStaticMeshComponent* TankBarrel = nullptr;
+	UTankTurretStaticMeshComponent* TankTurret = nullptr;
+	double LastFireTime = 0;
+
+	// Launch speed of a projectile. cm -> meter = 500 m/s;
+	UPROPERTY(EditDefaultsOnly, Category = FiringSetup)
+		float ProjectileSpeed = 5000.f;
+	UPROPERTY(EditDefaultsOnly, Category = FiringSetup)
+		float FireCooldown = 3.f;
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		TSubclassOf<AProjectile> ProjectileType = nullptr;
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly, Category = Setup)
-		EPointerStatus PointerStatus = EPointerStatus::Aiming;
+		EPointerStatus PointerStatus;
 	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTankTurretBarrel(UTankTurretStaticMeshComponent* TankTurret, UTankBarrelStaticMeshComponent* TankBarrel);	
-
-private:
-	UTankBarrelStaticMeshComponent* TankBarrel = nullptr;
-	UTankTurretStaticMeshComponent* TankTurret = nullptr;
-
-	double LastFireTime = 0;
-
-	// Launch speed of a projectile. cm -> meter = 500 m/s;
-	UPROPERTY(EditDefaultsOnly, Category = FiringSetup)
-		float ProjectileSpeed = 5000.f; 
-	UPROPERTY(EditDefaultsOnly, Category = FiringSetup)
-		float FireCooldown = 3.f;
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
-		TSubclassOf<AProjectile> ProjectileType = nullptr;	
+		void SetTankTurretBarrel(UTankTurretStaticMeshComponent* TankTurret, UTankBarrelStaticMeshComponent* TankBarrel);
 };

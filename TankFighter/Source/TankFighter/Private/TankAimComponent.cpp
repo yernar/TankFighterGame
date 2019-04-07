@@ -11,8 +11,7 @@ UTankAimComponent::UTankAimComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = false;
-	// ...
+	PrimaryComponentTick.bCanEverTick = true;
 }
 
 // Called when the game starts
@@ -25,6 +24,12 @@ void UTankAimComponent::BeginPlay()
 void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	if (IsReloaded())
+	{
+		PointerStatus = EPointerStatus::Aiming;
+	}
+	else
+		PointerStatus = EPointerStatus::Reloading;
 }
 
 void UTankAimComponent::AimAt(FVector& EndLocation)
@@ -55,16 +60,6 @@ void UTankAimComponent::SetTankTurretBarrel(UTankTurretStaticMeshComponent* Tank
 	this->TankBarrel = TankBarrel;
 }
 
-UTankBarrelStaticMeshComponent* UTankAimComponent::GetTankBarrel() const
-{
-	return TankBarrel;
-}
-
-UTankTurretStaticMeshComponent* UTankAimComponent::GetTankTurret() const
-{
-	return TankTurret;
-}
-
 void UTankAimComponent::MoveBarrel(FVector& AimDirection)
 {
 	FRotator BarrelRotation = TankBarrel->GetForwardVector().Rotation();
@@ -85,10 +80,14 @@ void UTankAimComponent::RotateTurret(FVector& AimDirection)
 	return;
 }
 
+bool UTankAimComponent::IsReloaded() const
+{	
+	return ((FPlatformTime::Seconds() - LastFireTime) > FireCooldown);
+}
+
 void UTankAimComponent::Fire()
 {
-	bool bIsReloaded = ((FPlatformTime::Seconds() - LastFireTime) > FireCooldown);
-	if (ensure(TankBarrel && ProjectileType) && bIsReloaded)
+	if (ensure(TankBarrel && ProjectileType) && IsReloaded())
 	{
 		AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileType,
 			(TankBarrel->GetSocketLocation(FName("ProjectileSocket"))),
