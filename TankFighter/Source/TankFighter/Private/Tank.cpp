@@ -4,7 +4,6 @@
 #include "TankAimComponent.h"
 #include "Projectile.h"
 #include "TankBarrelStaticMeshComponent.h"
-#include "TankNavMovementComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -20,6 +19,7 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();	
+	TankAimComponent = FindComponentByClass<UTankAimComponent>();
 }
 
 // Called every frame
@@ -39,8 +39,6 @@ void ATank::AimAt(FVector& HitLocation)
 	if (!ensure(TankAimComponent)) return;
 	TankAimComponent->AimAt(HitLocation, ProjectileSpeed);
 }
-
-
 
 void ATank::Fire()
 {

@@ -8,10 +8,8 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	UTankAimComponent* TankAimComponent = GetControlledTank()->FindComponentByClass<UTankAimComponent>();
-	if (ensure(TankAimComponent))
-		FoundAimingComponent(TankAimComponent);
-	else
-		UE_LOG(LogTemp, Warning, TEXT("TankAimComponent is not found"))
+	if (!ensure(TankAimComponent)) return;
+	FoundAimingComponent(TankAimComponent);
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
