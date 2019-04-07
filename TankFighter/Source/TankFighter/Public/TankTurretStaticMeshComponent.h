@@ -18,7 +18,7 @@ public:
 	void Rotate(float);
 
 private:
-	//DPS = degrees per second
+	// DPS = degrees per second
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float MaxTankTurretDPS = 25.f;
 	

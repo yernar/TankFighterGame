@@ -18,13 +18,13 @@ public:
 	void Elevate(float);
 
 private:
-	//DPS = degrees per second
+	// DPS = degrees per second
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float MaxTankBarrelDPS = 10.f;
-	//D = degrees
+	// D = degrees
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float MaxTankBarrelElevationsD = 25.5f; 
-	//D = degrees
+	// D = degrees
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float MinTankBarrelElevationsD = 0.f;
 };

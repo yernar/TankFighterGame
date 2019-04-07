@@ -6,7 +6,6 @@
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
-class ATank;
 class UTankAimComponent;
 
 /**
@@ -33,11 +32,13 @@ private:
 	bool GetLookDirection(const FVector2D&, FVector&) const;
 	bool GetLookVectorHitLocation(const FVector&, FVector&) const;
 
+	// X size
 	UPROPERTY(EditDefaultsOnly)
 		float CrossHairXLocation = 0.5f;
+	// Y size
 	UPROPERTY(EditDefaultsOnly)
 		float CrossHairYLocation = 0.3333f;
+	// cm->meter->kilometer
 	UPROPERTY(EditDefaultsOnly)
-		float LineTraceRange = 1000000.f; /// cm->meter->kilometer = 10km
-
+		float LineTraceRange = 1000000.f; 
 };

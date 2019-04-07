@@ -8,6 +8,7 @@
 
 class UTankBarrelStaticMeshComponent;
 class UTankTurretStaticMeshComponent;
+class AProjectile;
 
 UENUM()
 enum class EPointerStatus : uint8
@@ -26,6 +27,19 @@ public:
 	// Sets default values for this component's properties
 	UTankAimComponent();
 
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	// Player and AI's aimping point
+	void AimAt(FVector&);
+	void MoveBarrel(FVector&);
+	void RotateTurret(FVector&);
+	UTankBarrelStaticMeshComponent* GetTankBarrel() const;
+	UTankTurretStaticMeshComponent* GetTankTurret() const;
+
+	UFUNCTION(BlueprintCallable)
+		void Fire();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -33,23 +47,19 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = Setup)
 		EPointerStatus PointerStatus = EPointerStatus::Aiming;
 	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTankTurretBarrel(UTankTurretStaticMeshComponent* TankTurret, UTankBarrelStaticMeshComponent* TankBarrel);
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	
-	// Player and AI's aimping point
-	void AimAt(FVector&);
-	void MoveBarrel(FVector&);
-	void RotateTurret(FVector&);
-
-	UTankBarrelStaticMeshComponent* GetTankBarrel() const;
+		void SetTankTurretBarrel(UTankTurretStaticMeshComponent* TankTurret, UTankBarrelStaticMeshComponent* TankBarrel);	
 
 private:
 	UTankBarrelStaticMeshComponent* TankBarrel = nullptr;
 	UTankTurretStaticMeshComponent* TankTurret = nullptr;
 
+	double LastFireTime = 0;
+
+	// Launch speed of a projectile. cm -> meter = 500 m/s;
 	UPROPERTY(EditDefaultsOnly, Category = FiringSetup)
-		float ProjectileSpeed = 5000.f; /// Launch speed of a projectile. cm -> meter = 500 m/s;
+		float ProjectileSpeed = 5000.f; 
+	UPROPERTY(EditDefaultsOnly, Category = FiringSetup)
+		float FireCooldown = 3.f;
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		TSubclassOf<AProjectile> ProjectileType = nullptr;	
 };

@@ -6,7 +6,6 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-class ATank;
 class UTankAimComponent;
 
 /**
@@ -22,6 +21,7 @@ public:
 	virtual void Tick(float) override;
 
 private:
+	// Radius between AI and Player's Tank
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
 	float AcceptanceRadius = 3000.f;
 };
