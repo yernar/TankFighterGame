@@ -13,11 +13,11 @@ void ATankAIController::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("PlayersTank is not found!"))*/
 }
 
-void ATankAIController::Tick(float DeltaTime)
+void ATankAIController::Tick(float DeltaTime) // TODO Refactor this method
 {
 	ATank* FirstPlayersTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	ATank* ControlledTank = Cast<ATank>(GetPawn());
-	if (FirstPlayersTank) // TODO Refactor this method
+	if (ensure(FirstPlayersTank))
 	{
 		MoveToActor(FirstPlayersTank, AcceptanceRadius);
 		FVector* FirstPlayersTankLocation = new FVector(FirstPlayersTank->GetActorLocation());

@@ -36,7 +36,7 @@ void ATank::Tick(float DeltaTime)
 
 void ATank::AimAt(FVector& HitLocation)
 {	
-	if (!TankAimComponent) return;
+	if (!ensure(TankAimComponent)) return;
 	TankAimComponent->AimAt(HitLocation, ProjectileSpeed);
 }
 
@@ -44,10 +44,10 @@ void ATank::AimAt(FVector& HitLocation)
 
 void ATank::Fire()
 {
-	if (!TankAimComponent) return;
+	if (!ensure(TankAimComponent)) return;
 	bool bIsReloaded = ((FPlatformTime::Seconds() - LastFireTime) > FireCooldown);
 	UTankBarrelStaticMeshComponent *TankBarrel = TankAimComponent->GetTankBarrel();
-	if (TankBarrel && bIsReloaded)
+	if (ensure(TankBarrel) && bIsReloaded)
 	{
 		AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileType,
 			(TankBarrel->GetSocketLocation(FName("ProjectileSocket"))),
