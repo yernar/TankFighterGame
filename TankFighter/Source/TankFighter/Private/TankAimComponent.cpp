@@ -34,7 +34,7 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	// ...
 }
 
-void UTankAimComponent::AimAt(FVector& EndLocation, float ProjectileSpeed)
+void UTankAimComponent::AimAt(FVector& EndLocation)
 {
 	if (!ensure(TankBarrel)) return;
 	//UE_LOG(LogTemp, Warning, TEXT("TEST UTANKAIMCOMPONENT AIMAT"))

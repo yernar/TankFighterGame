@@ -40,7 +40,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
 	// Player and AI's aimping point
-	void AimAt(FVector&, float);
+	void AimAt(FVector&);
 	void MoveBarrel(FVector&);
 	void RotateTurret(FVector&);
 
@@ -49,4 +49,7 @@ public:
 private:
 	UTankBarrelStaticMeshComponent* TankBarrel = nullptr;
 	UTankTurretStaticMeshComponent* TankTurret = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = FiringSetup)
+		float ProjectileSpeed = 5000.f; /// Launch speed of a projectile. cm -> meter = 500 m/s;
 };

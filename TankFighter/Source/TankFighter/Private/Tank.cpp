@@ -1,7 +1,6 @@
 // Copyright Magic Inc., Yernar Aldabergenov© 2019.
 
 #include "Tank.h"
-#include "TankAimComponent.h"
 #include "Projectile.h"
 #include "TankBarrelStaticMeshComponent.h"
 
@@ -19,7 +18,7 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();	
-	TankAimComponent = FindComponentByClass<UTankAimComponent>();
+	/// TankAimComponent = FindComponentByClass<UTankAimComponent>();
 }
 
 // Called every frame
@@ -34,17 +33,10 @@ void ATank::Tick(float DeltaTime)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }*/
 
-void ATank::AimAt(FVector& HitLocation)
-{	
-	if (!ensure(TankAimComponent)) return;
-	TankAimComponent->AimAt(HitLocation, ProjectileSpeed);
-}
-
 void ATank::Fire()
 {
-	if (!ensure(TankAimComponent)) return;
 	bool bIsReloaded = ((FPlatformTime::Seconds() - LastFireTime) > FireCooldown);
-	UTankBarrelStaticMeshComponent *TankBarrel = TankAimComponent->GetTankBarrel();
+	/// UTankBarrelStaticMeshComponent *TankBarrel = TankAimComponent->GetTankBarrel();
 	if (ensure(TankBarrel) && bIsReloaded)
 	{
 		AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileType,
@@ -53,4 +45,5 @@ void ATank::Fire()
 		Projectile->LaunchProjectile(ProjectileSpeed);
 		LastFireTime = FPlatformTime::Seconds();
 	}
+	else if (!ensure(TankBarrel)) return;
 }

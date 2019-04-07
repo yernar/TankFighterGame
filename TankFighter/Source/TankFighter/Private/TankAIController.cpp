@@ -2,6 +2,7 @@
 
 #include "TankAIController.h"
 #include "Tank.h"
+#include "TankAimComponent.h"
 
 void ATankAIController::BeginPlay()
 {
@@ -16,13 +17,13 @@ void ATankAIController::BeginPlay()
 void ATankAIController::Tick(float DeltaTime) // TODO Refactor this method
 {
 	ATank* FirstPlayersTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	ATank* ControlledTank = Cast<ATank>(GetPawn());
+	UTankAimComponent* ControlledTank = GetPawn()->FindComponentByClass<UTankAimComponent>();
 	if (ensure(FirstPlayersTank))
 	{
 		MoveToActor(FirstPlayersTank, AcceptanceRadius);
 		FVector* FirstPlayersTankLocation = new FVector(FirstPlayersTank->GetActorLocation());
 		ControlledTank->AimAt(*FirstPlayersTankLocation);
-		ControlledTank->Fire();
+		/// ControlledTank->Fire();
 		delete FirstPlayersTankLocation;
 	}	
 }
