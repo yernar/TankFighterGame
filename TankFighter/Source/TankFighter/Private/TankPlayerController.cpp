@@ -23,7 +23,7 @@ UTankAimComponent* ATankPlayerController::GetAimComponent() const
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!ensure(GetAimComponent())) return;
+	if (!(ensure(GetAimComponent()) && GetPawn())) return;
 
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation))

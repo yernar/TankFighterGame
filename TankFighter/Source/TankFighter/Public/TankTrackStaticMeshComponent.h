@@ -15,6 +15,12 @@ class TANKFIGHTER_API UTankTrackStaticMeshComponent : public UStaticMeshComponen
 	GENERATED_BODY()
 
 public:
+	// Sets default values for this component's properties
+	UTankTrackStaticMeshComponent();
+
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 	UFUNCTION(BlueprintCallable, Category = Input)
 		void SetThrottle(float Throttle);
 private:
