@@ -23,5 +23,5 @@ public:
 private:
 	// Radius between AI and Player's Tank
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
-	float AcceptanceRadius = 3000.f;
+		float AcceptanceRadius = 3000.f;
 };

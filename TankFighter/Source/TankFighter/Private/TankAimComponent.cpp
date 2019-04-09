@@ -24,7 +24,12 @@ void UTankAimComponent::BeginPlay()
 void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if (IsReloaded())
+
+	if (Ammo == 0)
+	{
+		PointerStatus = EPointerStatus::NoAmmo;
+	}
+	else if (IsReloaded())
 	{
 		PointerStatus = EPointerStatus::Aiming;
 	}
@@ -49,9 +54,13 @@ void UTankAimComponent::AimAt(FVector& EndLocation)
 						ESuggestProjVelocityTraceOption::DoNotTrace) ? 
 				AimDirection = FireVelocity.GetSafeNormal() :
 				AimDirection = FVector(0);
-	MoveBarrel(AimDirection);
-	RotateTurret(AimDirection);
+	MoveTurretBarrel(AimDirection);
 	return;
+}
+
+int32 UTankAimComponent::GetAmmo() const
+{
+	return Ammo;
 }
 
 void UTankAimComponent::SetTankTurretBarrel(UTankTurretStaticMeshComponent* TankTurret, UTankBarrelStaticMeshComponent* TankBarrel)
@@ -60,20 +69,12 @@ void UTankAimComponent::SetTankTurretBarrel(UTankTurretStaticMeshComponent* Tank
 	this->TankBarrel = TankBarrel;
 }
 
-void UTankAimComponent::MoveBarrel(FVector& AimDirection)
-{
-	FRotator BarrelRotation = TankBarrel->GetForwardVector().Rotation();
-	FRotator AimRotation = AimDirection.Rotation();
-	FRotator DeltaRotation = AimRotation - BarrelRotation;
-	TankBarrel->Elevate(DeltaRotation.Pitch);
-	return;
-}
-
-void UTankAimComponent::RotateTurret(FVector& AimDirection)
+void UTankAimComponent::MoveTurretBarrel(FVector& AimDirection)
 {
 	FRotator TurretRotation = TankBarrel->GetForwardVector().Rotation();
 	FRotator AimRotation = AimDirection.Rotation();
 	FRotator DeltaRotation = AimRotation - TurretRotation;
+	TankBarrel->Elevate(DeltaRotation.Pitch);
 	( (FMath::Abs(DeltaRotation.Yaw) < 180) ? 
 		(TankTurret->Rotate(DeltaRotation.Yaw)) : 
 		(TankTurret->Rotate(-DeltaRotation.Yaw)) );
@@ -87,13 +88,14 @@ bool UTankAimComponent::IsReloaded() const
 
 void UTankAimComponent::Fire()
 {
-	if (ensure(TankBarrel && ProjectileType) && IsReloaded())
+	if ((ensure(TankBarrel && ProjectileType) && IsReloaded()) && PointerStatus != EPointerStatus::NoAmmo)
 	{
 		AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileType,
 			(TankBarrel->GetSocketLocation(FName("ProjectileSocket"))),
 			(TankBarrel->GetSocketRotation(FName("ProjectileSocket"))));
 		Projectile->LaunchProjectile(ProjectileSpeed);
 		LastFireTime = FPlatformTime::Seconds();
+		Ammo--;
 	}
 	else if (!ensure(TankBarrel && ProjectileType)) return;
 }

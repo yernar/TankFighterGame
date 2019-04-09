@@ -14,7 +14,8 @@ UENUM()
 enum class EPointerStatus : uint8
 {
 	Reloading,
-	Aiming
+	Aiming,
+	NoAmmo
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -32,12 +33,15 @@ public:
 	// Player and AI's aimping point
 	void AimAt(FVector&);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = Fire)
+		int32 GetAmmo() const;
+	UFUNCTION(BlueprintCallable, Category = Fire)
 		void Fire();
+	
+
 
 private:
-	void MoveBarrel(FVector&);
-	void RotateTurret(FVector&);
+	void MoveTurretBarrel(FVector&);
 	bool IsReloaded() const;
 
 	UTankBarrelStaticMeshComponent* TankBarrel = nullptr;
@@ -51,6 +55,8 @@ private:
 		float FireCooldown = 3.f;
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		TSubclassOf<AProjectile> ProjectileType = nullptr;
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		int32 Ammo = 5;
 
 protected:
 	// Called when the game starts

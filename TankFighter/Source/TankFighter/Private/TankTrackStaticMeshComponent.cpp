@@ -36,7 +36,6 @@ void UTankTrackStaticMeshComponent::SidewaysForce()
 void UTankTrackStaticMeshComponent::SetThrottle(float CurrentThrottle)
 {
 	Throttle = FMath::Clamp<float>(Throttle + CurrentThrottle, -1.f, 1.f);
-	// DriveTracks(Throttle);
 }
 
 void UTankTrackStaticMeshComponent::DriveTracks()
