@@ -27,4 +27,10 @@ private:
 	// F = Force, value in Newtons
 	UPROPERTY(EditDefaultsOnly, Category = Force)
 		float MaxTrackDrivingF = 50000000.f; // F = mass * acceleration. Tank mass = 50000kg * 10m/s^2
+	UFUNCTION()
+		void OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
 };

@@ -18,6 +18,16 @@ void UTankTrackStaticMeshComponent::TickComponent(float DeltaTime, ELevelTick Ti
 	TankRoot->AddForce(CorrectionForce);
 }
 
+void UTankTrackStaticMeshComponent::BeginPlay()
+{
+	OnComponentHit.AddDynamic(this, &UTankTrackStaticMeshComponent::OnCompHit);
+}
+
+void UTankTrackStaticMeshComponent::OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	UE_LOG(LogTemp, Warning, TEXT("HIITTTTING"))
+}
+
 void UTankTrackStaticMeshComponent::SetThrottle(float Throttle)
 {
 	FVector ForceApplied = GetForwardVector() * MaxTrackDrivingF * Throttle;
