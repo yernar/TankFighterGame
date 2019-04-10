@@ -25,6 +25,8 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	UE_LOG(LogTemp, Warning, TEXT("VS 2019"))
+
 	if (Ammo == 0)
 	{
 		PointerStatus = EPointerStatus::NoAmmo;
