@@ -25,8 +25,6 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	UE_LOG(LogTemp, Warning, TEXT("VS 2019"))
-
 	if (Ammo == 0)
 	{
 		PointerStatus = EPointerStatus::NoAmmo;
@@ -43,7 +41,7 @@ void UTankAimComponent::AimAt(FVector& EndLocation)
 {
 	if (!ensure(TankBarrel)) return;	
 	FVector FireVelocity;
-	FVector StartLocation = TankBarrel->GetSocketLocation(FName("ProjectileSocket"));
+	FVector StartLocation = TankBarrel->GetSocketLocation(FName(" "));
 	FVector AimDirection;
 	FString TankName = GetOwner()->GetName();
 	FString bTest;
