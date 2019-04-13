@@ -2,13 +2,27 @@
 
 #include "Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
 AProjectile::AProjectile()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+
+	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("CollisionMesh Component"));
+	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("ParticleSystem Component"));
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("ProjectileMovement Components"));
+
+	
+	CollisionMesh->SetNotifyRigidBodyCollision(true);
+	CollisionMesh->SetVisibility(false);
+
+	LaunchBlast->AttachTo(RootComponent);
+
+	ProjectileMovement->bAutoActivate = false;
+
+	SetRootComponent(CollisionMesh);
 }
 
 // Called when the game starts or when spawned
