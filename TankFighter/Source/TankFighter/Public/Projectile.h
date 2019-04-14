@@ -33,4 +33,10 @@ protected:
 		UStaticMeshComponent* CollisionMesh = nullptr;
 	UPROPERTY(VisibleAnywhere, Category = Components)
 		UParticleSystemComponent* LaunchBlast = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = Components)
+		UParticleSystemComponent* ImpactBlast = nullptr;
+
+private:
+	UFUNCTION()
+		void OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 };
