@@ -14,15 +14,13 @@ AProjectile::AProjectile()
 	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("ParticleSystem Component"));
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("ProjectileMovement Components"));
 
-	
+	SetRootComponent(CollisionMesh);
 	CollisionMesh->SetNotifyRigidBodyCollision(true);
 	CollisionMesh->SetVisibility(false);
 
 	LaunchBlast->AttachTo(RootComponent);
 
-	ProjectileMovement->bAutoActivate = false;
-
-	SetRootComponent(CollisionMesh);
+	ProjectileMovement->bAutoActivate = true;	
 }
 
 // Called when the game starts or when spawned
