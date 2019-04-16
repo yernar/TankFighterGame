@@ -8,6 +8,7 @@
 
 class UProjectileMovementComponent;
 class UParticleSystemComponent;
+class URadialForceComponent;
 
 UCLASS()
 class TANKFIGHTER_API AProjectile : public AActor
@@ -35,8 +36,14 @@ protected:
 		UParticleSystemComponent* LaunchBlast = nullptr;
 	UPROPERTY(VisibleAnywhere, Category = Components)
 		UParticleSystemComponent* ImpactBlast = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = Components)
+		URadialForceComponent* ExplosionForce = nullptr;
 
 private:
 	UFUNCTION()
 		void OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	UFUNCTION()
+		void OnTimerExpire();
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		float DestroyDelay = 10.f;
 };
