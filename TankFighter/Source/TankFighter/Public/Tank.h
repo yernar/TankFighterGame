@@ -6,6 +6,8 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+class AProjectile;
+
 UCLASS()
 class TANKFIGHTER_API ATank : public APawn
 {
@@ -24,4 +26,12 @@ protected:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent*) override;
+
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+private:
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		int32 Health = 100;
+	UPROPERTY(EditAnywhere, Category = Health)
+		int32 CurrentHealth = Health;
 };

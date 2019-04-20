@@ -6,9 +6,11 @@
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
+class UStaticMeshComponent;
 class UProjectileMovementComponent;
 class UParticleSystemComponent;
 class URadialForceComponent;
+class UGameplayStatics;
 
 UCLASS()
 class TANKFIGHTER_API AProjectile : public AActor
@@ -23,6 +25,8 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	float GetBaseDamage() const;
 
 protected:
 	// Called when the game starts or when spawned
@@ -46,4 +50,6 @@ private:
 		void OnTimerExpire();
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float DestroyDelay = 10.f;
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		float BaseDamage = 20.f;
 };

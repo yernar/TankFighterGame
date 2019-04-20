@@ -1,6 +1,7 @@
 // Copyright Magic Inc., Yernar Aldabergenov© 2019.
 
 #include "Tank.h"
+#include "Projectile.h"
 
 // Sets default values
 ATank::ATank()
@@ -27,3 +28,11 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
+float ATank::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	int32 DamageToApply = FMath::Clamp<int32>(DamageAmount, 0, CurrentHealth);
+	CurrentHealth -= DamageToApply;
+	if (CurrentHealth <= 0)
+		UE_LOG(LogTemp, Warning, TEXT("Tank dead"))
+	return DamageToApply;
+}
