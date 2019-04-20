@@ -7,6 +7,7 @@
 #include "TankPlayerController.generated.h"
 
 class UTankAimComponent;
+class ATank;
 
 /**
  * 
@@ -19,6 +20,10 @@ class TANKFIGHTER_API ATankPlayerController : public APlayerController
 public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float) override;
+	virtual void SetPawn(APawn*) override;
+
+	UFUNCTION()
+		void OnPossessedTankDeath();
 
 protected:
 	UFUNCTION(BlueprintCallable, Category = Setup)

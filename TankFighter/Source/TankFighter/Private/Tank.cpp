@@ -14,6 +14,8 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CurrentHealth = Health;
 }
 
 // Called every frame

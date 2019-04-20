@@ -25,6 +25,8 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (!ensure(this) || !ensure(this->GetOwner())) return;
+
 	if (Ammo == 0)
 	{
 		PointerStatus = EPointerStatus::NoAmmo;
@@ -39,7 +41,7 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 void UTankAimComponent::AimAt(FVector& EndLocation)
 {
-	if (!ensure(TankBarrel)) return;	
+	if (!ensure(TankBarrel) || !ensure(this->GetOwner())) return;
 	FVector FireVelocity;
 	FVector StartLocation = TankBarrel->GetSocketLocation(FName(" "));
 	FVector AimDirection;

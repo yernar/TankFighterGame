@@ -13,14 +13,16 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	APawn* FirstPlayersTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 	UTankAimComponent* AimComponent = GetPawn()->FindComponentByClass<UTankAimComponent>();
-	if (ensure(FirstPlayersTank && AimComponent))
+	if (ensure(FirstPlayersTank && AimComponent && GetPawn()))
 	{
 		MoveToActor(FirstPlayersTank, AcceptanceRadius);
 		FVector* FirstPlayersTankLocation = new FVector(FirstPlayersTank->GetActorLocation());
 		AimComponent->AimAt(*FirstPlayersTankLocation);
 		AimComponent->Fire();
 		delete FirstPlayersTankLocation;
-	}	
+	}
+	else
+		return;
 }
 
 void ATankAIController::SetPawn(APawn* InPawn)
@@ -38,5 +40,7 @@ void ATankAIController::SetPawn(APawn* InPawn)
 
 void ATankAIController::OnPossessedTankDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("OMAIGAD NOW ITS DEAD"))
+	if (!GetPawn()) return;
+
+	GetPawn()->DetachFromControllerPendingDestroy();
 }
