@@ -22,6 +22,11 @@ void ATank::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+float ATank::GetHealthPercent() const
+{
+	return float(CurrentHealth) / float(Health);
+}
+
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {

@@ -20,6 +20,9 @@ public:
 	// Called every frame
 	virtual void Tick(float) override;
 
+	UFUNCTION(BlueprintPure, Category = Health)
+	float GetHealthPercent() const;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;	
