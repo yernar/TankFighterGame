@@ -7,6 +7,7 @@
 #include "TankAIController.generated.h"
 
 class UTankAimComponent;
+class ATank;
 
 /**
  * 
@@ -19,9 +20,12 @@ class TANKFIGHTER_API ATankAIController : public AAIController
 public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float) override;
+	virtual void SetPawn(APawn*) override;
 
 private:
 	// Radius between AI and Player's Tank
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
 		float AcceptanceRadius = 3000.f;
+	UFUNCTION()
+		void OnPossessedTankDeath();
 };

@@ -2,6 +2,7 @@
 
 #include "TankAIController.h"
 #include "TankAimComponent.h"
+#include "Tank.h"
 
 void ATankAIController::BeginPlay()
 {
@@ -20,4 +21,22 @@ void ATankAIController::Tick(float DeltaTime)
 		AimComponent->Fire();
 		delete FirstPlayersTankLocation;
 	}	
+}
+
+void ATankAIController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+
+	if (InPawn)
+	{
+		ATank* PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) return;
+
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossessedTankDeath);
+	}
+}
+
+void ATankAIController::OnPossessedTankDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("OMAIGAD NOW ITS DEAD"))
 }
