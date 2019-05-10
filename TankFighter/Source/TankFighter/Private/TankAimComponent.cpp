@@ -25,7 +25,7 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!ensure(this) || !ensure(this->GetOwner())) return;
+	if (!this || !this->GetOwner()) return;
 
 	if (Ammo == 0)
 	{
@@ -41,7 +41,7 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 void UTankAimComponent::AimAt(FVector& EndLocation)
 {
-	if (!ensure(TankBarrel) || !ensure(this->GetOwner())) return;
+	if (!TankBarrel || !this->GetOwner()) return;
 	FVector FireVelocity;
 	FVector StartLocation = TankBarrel->GetSocketLocation(FName(" "));
 	FVector AimDirection;
@@ -90,7 +90,7 @@ bool UTankAimComponent::IsReloaded() const
 
 void UTankAimComponent::Fire()
 {
-	if ((ensure(TankBarrel && ProjectileType) && IsReloaded()) && PointerStatus != EPointerStatus::NoAmmo)
+	if ((TankBarrel && ProjectileType && IsReloaded()) && PointerStatus != EPointerStatus::NoAmmo)
 	{
 		AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileType,
 			(TankBarrel->GetSocketLocation(FName("ProjectileSocket"))),
@@ -99,5 +99,5 @@ void UTankAimComponent::Fire()
 		LastFireTime = FPlatformTime::Seconds();
 		Ammo--;
 	}
-	else if (!ensure(TankBarrel && ProjectileType)) return;
+	else if (!TankBarrel && ProjectileType) return;
 }

@@ -15,6 +15,7 @@ void UTankTrackStaticMeshComponent::TickComponent(float DeltaTime, ELevelTick Ti
 
 void UTankTrackStaticMeshComponent::BeginPlay()
 {
+	Super::BeginPlay();
 	OnComponentHit.AddDynamic(this, &UTankTrackStaticMeshComponent::OnCompHit);
 }
 
@@ -23,6 +24,7 @@ void UTankTrackStaticMeshComponent::OnCompHit(UPrimitiveComponent* HitComp, AAct
 	DriveTracks();
 	SidewaysForce();
 	Throttle = 0.f;
+
 }
 
 void UTankTrackStaticMeshComponent::SidewaysForce()

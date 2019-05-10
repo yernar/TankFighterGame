@@ -1,5 +1,6 @@
 // Copyright Magic Inc., Yernar Aldabergenov© 2019.
 
+
 #include "Tank.h"
 #include "Projectile.h"
 

@@ -13,7 +13,7 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	APawn* FirstPlayersTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 	UTankAimComponent* AimComponent = GetPawn()->FindComponentByClass<UTankAimComponent>();
-	if (ensure(FirstPlayersTank && AimComponent && GetPawn()))
+	if (FirstPlayersTank && AimComponent && GetPawn())
 	{
 		MoveToActor(FirstPlayersTank, AcceptanceRadius);
 		FVector* FirstPlayersTankLocation = new FVector(FirstPlayersTank->GetActorLocation());
@@ -32,7 +32,7 @@ void ATankAIController::SetPawn(APawn* InPawn)
 	if (InPawn)
 	{
 		ATank* PossessedTank = Cast<ATank>(InPawn);
-		if (!ensure(PossessedTank)) return;
+		if (!PossessedTank) return;
 
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossessedTankDeath);
 	}

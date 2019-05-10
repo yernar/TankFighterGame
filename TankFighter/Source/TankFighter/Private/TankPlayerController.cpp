@@ -7,7 +7,7 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	if (!ensure(GetAimComponent())) return;
+	if (!GetAimComponent()) return;
 	FoundAimingComponent(GetAimComponent());
 }
 
@@ -24,7 +24,7 @@ void ATankPlayerController::SetPawn(APawn* InPawn)
 	if (InPawn)
 	{
 		ATank* PossessedTank = Cast<ATank>(InPawn);
-		if (!ensure(PossessedTank)) return;
+		if (!PossessedTank) return;
 
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPossessedTankDeath);
 	}
@@ -43,9 +43,7 @@ UTankAimComponent* ATankPlayerController::GetAimComponent() const
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!ensure(GetPawn())) return;
-	if (!ensure(GetAimComponent())) return;
-	if (!ensure(this)) return;
+	if (!GetPawn() || !GetAimComponent() || !this) return;
 
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation))
@@ -82,7 +80,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(const FVector& LookDirectio
 	if (GetWorld()->LineTraceSingleByChannel(HitResult, 
 			Start, 
 			End, 
-			ECC_Visibility))
+			ECC_Camera))
 	{
 		HitLocation = HitResult.Location;
 		return true;

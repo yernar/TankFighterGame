@@ -22,7 +22,6 @@ AProjectile::AProjectile()
 
 	
 	CollisionMesh->SetNotifyRigidBodyCollision(true);
-	CollisionMesh->SetVisibility(false);
 
 	LaunchBlast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
@@ -55,7 +54,7 @@ float AProjectile::GetBaseDamage() const
 
 void AProjectile::LaunchProjectile(float ProjectileSpeed)
 {
-	if (!ensure(this)) return;
+	if (!this) return;
 	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * ProjectileSpeed);
 	ProjectileMovement->Activate();
 }
