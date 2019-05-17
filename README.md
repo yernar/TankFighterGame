@@ -13,7 +13,7 @@ Escape - to get to the main menu.
 To download a setup for Windows 64bit: [TankFighter64.exe](https://workupload.com/file/wsDEsfCn)
 
 # Signs
-If other foes defeated you then you will automatically switch to spectating mode.
+If other foes defeated you then you will automatically switch to spectating mode.\
 There's no page that will appear after you win yet!
 
 # Good Luck & Have Fun!
