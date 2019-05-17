@@ -5,8 +5,8 @@ A Tank Fightning game on Unreal Engine 4.
 You will be spawned in the open world where you should defeat other tanks to win.
 
 # Controls:
-Mouse LK - to fire;
-V - change camera from 3rd person to 1rd and vise versa;
+Mouse LK - to fire;\
+V - change camera from 3rd person to 1rd and vise versa;\
 Escape - to get to the main menu.
 
 # Download:
