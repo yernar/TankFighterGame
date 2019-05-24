@@ -10,7 +10,7 @@ V - change camera from 3rd person to 1rd and vise versa;\
 Escape - to get to the main menu.
 
 # Download:
-To download a setup for Windows 64bit: [TankFighter64.exe](https://workupload.com/file/wsDEsfCn)
+To download a setup for Windows 64bit: [TankFighter64.exe](https://workupload.com/file/zxC7QJQ3)
 
 # Video
 Click the image below.
